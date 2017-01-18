@@ -14,7 +14,7 @@ namespace GuessTheNumber
 
         public static bool NumberEquals(int x, int y)
         {
-            
+            return (x == y);
         }
 
     }
