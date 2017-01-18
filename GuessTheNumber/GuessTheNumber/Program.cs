@@ -10,6 +10,15 @@ namespace GuessTheNumber
     {
         static void Main(string[] args)
         {
+            int defaultNumber = ThinkANumber();
+            Console.ReadLine();
+        }
+
+        public static int ThinkANumber()
+        {
+            Console.WriteLine("Please enter a number between 0-1000:");
+            int enteredNumber = Convert.ToInt32(Console.ReadLine());
+            return enteredNumber;
         }
     }
 }
