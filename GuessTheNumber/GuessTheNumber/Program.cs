@@ -11,5 +11,10 @@ namespace GuessTheNumber
         static void Main(string[] args)
         {
         }
+
+        public static bool IsNumberInRange(int min, int max)
+        {
+            
+        }
     }
 }
