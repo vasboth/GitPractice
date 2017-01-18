@@ -20,5 +20,10 @@ namespace GuessTheNumber
             int enteredNumber = Convert.ToInt32(Console.ReadLine());
             return enteredNumber;
         }
+
+        public static bool IsNumberInRange(int number, int min, int max)
+        {
+            return (number >= min) && (number <= max);
+        }
     }
 }
