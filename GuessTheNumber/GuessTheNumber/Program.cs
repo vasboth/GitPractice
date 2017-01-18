@@ -11,5 +11,11 @@ namespace GuessTheNumber
         static void Main(string[] args)
         {
         }
+
+        public static bool NumberEquals(int x, int y)
+        {
+            
+        }
+
     }
 }
