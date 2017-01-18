@@ -12,7 +12,7 @@ namespace GuessTheNumber
         {
         }
 
-        public static bool IsNumberInRange(int min, int max)
+        public static bool IsNumberInRange(int number, int min, int max)
         {
             
         }
