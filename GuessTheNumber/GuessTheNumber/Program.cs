@@ -1,51 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GuessTheNumber
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static string EnterText = "Please enter a number between {0} - {1}:";
+        public static string GuessText = "Please guess a number between {0} - {1}:";
+        public static string WrongInputText = "Number is not between {0} - {1}, please enter another number.";
+        
+        static void Main()
         {
+            int min = 0;
+            int max = 1000;
+            
             // get the number first player thinks
-            int theNumber = EnterANumber("Please enter a number between 0 - 1000:");
-            CheckRanges(theNumber, 0, 1000);
+            int theNumber = GetTheNumber(min, max);
             Console.ReadLine();
             Console.Clear();
 
             // guessing
-            int guessedNumber = EnterANumber("Please guess a number between 0 - 1000:");
-            while (!IsNumberInRange(guessedNumber, 0, 1000))
+            int guessResult = Guess(min, max, theNumber);
+            while (guessResult != 0)
             {
-                Console.WriteLine("Number is not between 0 - 1000, please enter another number.");
-                guessedNumber = EnterANumber("Please enter a number between 0 - 1000:");
+                string message = guessResult < 0 ? "smaller" : "greater";
+                Console.WriteLine("Incorrect. The number is {0}", message);
+
+                guessResult = Guess(min, max, theNumber);
             }
 
-            bool isEqual = NumberEquals(theNumber, guessedNumber);
-            
-            while (!isEqual)
-            {
-                string message = guessedNumber > theNumber ? "smaller" : "greater";
-                Console.WriteLine("Incorrect. The number is {0}",message);
-                guessedNumber = EnterANumber("Please guess another number between 0 - 1000:");
-                isEqual = NumberEquals(theNumber, guessedNumber);
-            }
+            // succeed
             Console.WriteLine("Congtrats, you have guessed the correct number!");
             Console.ReadLine();
-
         }
 
-        private static void CheckRanges(int number, int min, int max)
+        private static int GetTheNumber(int min, int max)
         {
-            while (!IsNumberInRange(theNumber, 0, 1000))
+            int theNumber = EnterANumber(String.Format(EnterText, min, max));
+            while (!IsNumberInRange(theNumber, min, max))
             {
-                Console.WriteLine("Number is not between 0 - 1000, please enter another number.");
-                theNumber = EnterANumber("Please enter a number between 0 - 1000:");
+                Console.WriteLine(WrongInputText, min, max);
+                theNumber = EnterANumber(String.Format(EnterText, min, max));
             }
+            return theNumber;
+        }
 
+        private static int Guess(int min, int max, int theNumber)
+        {
+            int guess = EnterANumber(String.Format(GuessText, min, max));
+            while (!IsNumberInRange(guess, min, max))
+            {
+                Console.WriteLine(WrongInputText, min, max);
+                guess = EnterANumber(String.Format(GuessText, min, max));
+            }
+            return theNumber.CompareTo(guess);
+        }
+        
+        public static bool IsNumberInRange(int number, int min, int max)
+        {
+            return (number >= min) && (number <= max);
         }
 
         public static int EnterANumber(string message)
@@ -53,11 +65,6 @@ namespace GuessTheNumber
             Console.WriteLine(message);
             int enteredNumber = Convert.ToInt32(Console.ReadLine());
             return enteredNumber;
-        }
-
-        public static bool NumberEquals(int x, int y)
-        {
-            return (x == y);
         }
 
     }
