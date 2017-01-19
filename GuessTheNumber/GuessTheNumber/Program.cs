@@ -10,6 +10,7 @@ namespace GuessTheNumber
         
         static void Main()
         {
+            // Test comment
             int min = 0;
             int max = 1000;
             
